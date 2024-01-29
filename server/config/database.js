@@ -1,8 +1,5 @@
 const mongoose = require("mongoose");
-const url = "mongodb+srv://admin:admin123*@app.s8jolhu.mongodb.net/";
-
-  
-  mongoose.connect(url)
+  mongoose.connect(process.env.Database_URL)
     .then(() => {
       console.log('Connected to MongoDB');
     })
