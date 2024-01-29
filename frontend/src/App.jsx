@@ -10,8 +10,7 @@ function App() {
 
   return (
     <>
-      <Login/>
-      <Footer/>
+      <Register/>
     </>
   )
 }

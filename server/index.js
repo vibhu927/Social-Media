@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+require("dotenv").config();//NEED TO ADD TO ACCESS ENV VARIBALES
 const cors = require("cors");
 const bodyParser = require('body-parser');
 const userController = require("./controllers/userController");
@@ -14,7 +15,7 @@ app.get('/', (req, res)=>{
    res.json({message:"Home route loaded successfully"})
 })
 
-app.listen(8080, ()=>{
-    console.log("listening");
+app.listen(process.env.PORT, ()=>{
+    console.log("listen");
 });
 
