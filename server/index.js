@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-require("dotenv").config();//NEED TO ADD TO ACCESS ENV VARIBALES
+require("dotenv").config();
 const cors = require("cors");
 const bodyParser = require('body-parser');
 const userController = require("./controllers/userController");
