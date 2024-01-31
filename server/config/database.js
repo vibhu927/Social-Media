@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const options = {
-     dbName:"SocialMedia",
+     dbName:process.env.DATABASE_NAME,
 }
   mongoose.connect(process.env.Database_URL, options)
     .then(() => {
