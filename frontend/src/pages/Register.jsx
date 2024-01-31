@@ -17,17 +17,14 @@ export default function Register() {
     console.log("Password:", password);
     console.log("Confirm Password:", confirmPassword);
    try {
-      // Make a POST request to your API
-      const response = await axios.post('https://192.168.1.141:8080/users/createUser', {
+      const response = await axios.post('http://localhost:4000/users/createUser', {
         username,
         email,
         password,
       });
 
-      // Handle the response as needed
       console.log("Registration successful:", response.data);
 
-      // Clear input fields
       setUsername('');
       setEmail('');
       setPassword('');

@@ -1,5 +1,8 @@
 const mongoose = require("mongoose");
-  mongoose.connect(process.env.Database_URL)
+const options = {
+     dbName:"SocialMedia",
+}
+  mongoose.connect(process.env.Database_URL, options)
     .then(() => {
       console.log('Connected to MongoDB');
     })
