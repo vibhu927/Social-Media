@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import axios from "axios";
@@ -17,20 +17,17 @@ export default function Register() {
     console.log("Password:", password);
     console.log("Confirm Password:", confirmPassword);
    try {
-      const response = await axios.post('http://localhost:4000/users/createUser', {
-        username,
-        email,
-        password,
-      });
-
+    const response = await axios.post(`http://${import.meta.env.VITE_PORT}/users/createUser`, {
+      username,
+      email,
+      password,
+    });
       console.log("Registration successful:", response.data);
-
       setUsername('');
       setEmail('');
       setPassword('');
       setConfirmPassword('');
     } catch (error) {
-      // Handle errors
       console.error("Registration failed:", error.message);
     }
   };

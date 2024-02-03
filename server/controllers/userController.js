@@ -16,7 +16,7 @@ async function loginUser(req, res, next) {
   try{
     console.log(req.body);
     const response = await User.findOne({username: req.body.username, password: req.body.password});
-    res.status(201).json(newUser);
+    res.status(201).json(response);
   }
   catch(err){
     res.status(400).json({ error: 'Failed to Login user' });
