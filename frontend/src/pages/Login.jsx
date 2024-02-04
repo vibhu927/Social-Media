@@ -7,8 +7,8 @@ export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const handleClick = async()=>{
-    console.log("Login : ", username," ", password)
-    const response = await axios.post('http://localhost:4000/users/loginUser', {
+    console.log("Login : ", username," : ", password)
+    const response = await axios.post(`http://${import.meta.env.VITE_PORT}/users/loginUser`, {
       username,
       password,
     });

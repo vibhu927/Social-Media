@@ -15,7 +15,7 @@ app.get('/', (req, res)=>{
    res.json({message:"Home route loaded successfully"})
 })
 
-app.listen(process.env.PORT,"192.168.1.153",()=>{
+app.listen(process.env.PORT,process.env.MYIP,()=>{
     console.log("listen");
 });
 
