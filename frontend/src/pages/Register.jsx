@@ -2,6 +2,8 @@ import { useState } from "react";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import axios from "axios";
+import { Link } from "react-router-dom";
+
 export default function Register() {
   // State for input fields
   const [username, setUsername] = useState('');
@@ -11,17 +13,17 @@ export default function Register() {
 
   // Function to handle registration
   const handleRegister = async (e) => {
-    e.preventDefault(); 
+    e.preventDefault();
     console.log("Username:", username);
     console.log("Email:", email);
     console.log("Password:", password);
     console.log("Confirm Password:", confirmPassword);
-   try {
-    const response = await axios.post(`http://${import.meta.env.VITE_PORT}/users/createUser`, {
-      username,
-      email,
-      password,
-    });
+    try {
+      const response = await axios.post(`http://${import.meta.env.VITE_PORT}/users/createUser`, {
+        username,
+        email,
+        password,
+      });
       console.log("Registration successful:", response.data);
       setUsername('');
       setEmail('');
@@ -88,6 +90,12 @@ export default function Register() {
           Register
         </Button>
       </div>
+      <div className="back-to-login flex justify-center">
+        <Link to='/login' className="font-medium text-lg text-zinc-50 text-center">
+          Back to Login
+        </Link>
+      </div>
+
     </div>
   );
 }

@@ -2,6 +2,7 @@ import { useState } from "react";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import axios from 'axios';
+import { Link } from "react-router-dom";
 
 export default function Login() {
   const [username, setUsername] = useState("");
@@ -50,6 +51,10 @@ export default function Login() {
       </div>
       <div className="login-btn flex items-center justify-center">
         <Button variant="contained" onClick={handleLogin}>Login</Button>
+      </div>
+      <div className="register-div">
+        <span className="text-base text-zinc-50">Not a member ? </span>
+        <Link to='/register' className="font-medium text-lg text-zinc-50">Register Here</Link>
       </div>
     </div>
   );
