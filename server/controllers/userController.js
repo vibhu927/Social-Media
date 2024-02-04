@@ -13,13 +13,21 @@ async function createUser(req, res, next) {
 }
 
 async function loginUser(req, res, next) {
-  try{
+  try {
     console.log(req.body);
-    const response = await User.findOne({username: req.body.username, password: req.body.password});
-    res.status(201).json(response);
-  }
-  catch(err){
-    res.status(400).json({ error: 'Failed to Login user' });
+    const response = await User.findOne({
+      username: req.body.username,
+      password: req.body.password,
+    });
+
+    if (response) {
+      res.status(200).json(response);
+    } else {
+      res.status(401).json({ error: 'Invalid username or password' });
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Failed to login user' });
   }
 }
 
