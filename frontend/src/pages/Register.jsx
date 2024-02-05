@@ -3,7 +3,8 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import axios from "axios";
 import { Link } from "react-router-dom";
-
+import Logo from "../components/Logo";
+import { motion } from "framer-motion";
 export default function Register() {
   // State for input fields
   const [username, setUsername] = useState('');
@@ -33,10 +34,22 @@ export default function Register() {
       console.error("Registration failed:", error.message);
     }
   };
+  const containerVariants = {
+    hidden: { opacity: 0, rotateY: 180 },
+    visible: { opacity: 1, rotateY: 0, transition: { duration: 1.5, ease: "easeInOut" } },
+  };
   return (
-    <div className="grid gap-6 place-content-center h-screen bg-slate-900">
+   <div className="bg-sky-50 h-screen flex items-center justify-center">
+     <motion.div className="grid gap-6 bg-slate-900 rounded p-12 rounded-xl shadow-xl dark:shadow-slate-600"
+     initial="hidden"
+     animate="visible"
+     variants={containerVariants}
+     >
+       <div className="header">
+      <Logo linkUrl="/login" linkName={"Login Here."} paragraph={"Back to Login."}/>
+      </div>
       <div className="flex gap-6">
-        <div className="email-field">
+        <div className="email-field mx-auto">
           <TextField
             className="bg-sky-50 rounded-md"
             size="small"
@@ -47,7 +60,7 @@ export default function Register() {
             onChange={(e) => setUsername(e.target.value)}
           />
         </div>
-        <div className="password-field">
+        <div className="password-field mx-auto">
           <TextField
             className="bg-sky-50 rounded-md"
             size="small"
@@ -60,7 +73,7 @@ export default function Register() {
         </div>
       </div>
       <div className="flex gap-6">
-        <div className="email-field">
+        <div className="email-field mx-auto">
           <TextField
             className="bg-sky-50 rounded-md"
             size="small"
@@ -72,7 +85,7 @@ export default function Register() {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <div className="password-field">
+        <div className="password-field mx-auto">
           <TextField
             className="bg-sky-50 rounded-md"
             size="small"
@@ -90,12 +103,13 @@ export default function Register() {
           Register
         </Button>
       </div>
-      <div className="back-to-login flex justify-center">
+      {/* <div className="back-to-login flex justify-center">
         <Link to='/login' className="font-medium text-lg text-zinc-50 text-center">
           Back to Login
         </Link>
-      </div>
+      </div> */}
 
+   </motion.div>
     </div>
   );
 }
