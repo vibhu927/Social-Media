@@ -1,8 +1,8 @@
-import { useState } from "react";
-import TextField from "@mui/material/TextField";
+import { useState } from 'react';
+import TextField from '@mui/material/TextField';
+import { loginFields } from '../constants/formFields';
 import Button from "@mui/material/Button";
 import axios from 'axios';
-import { Link } from "react-router-dom";
 import Logo from "../components/Logo";
 import { motion } from "framer-motion";
 export default function Login() {
@@ -10,26 +10,27 @@ export default function Login() {
     hidden: { opacity: 0, rotateY: 180 },
     visible: { opacity: 1, rotateY: 0, transition: { duration: 1.5, ease: "easeInOut" } },
   };
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-
-  const handleLogin = async (e) => {
-    e.preventDefault();
-    console.log("Username:", username);
-    console.log("Password:", password);
-    try {
-      const response = await axios.post(`http://${import.meta.env.VITE_PORT}/users/loginUser`, {
-        username,
-        password,
-      });
-      console.log("Login successful:", response.data);
-      setUsername('');
-      setPassword('');
-    } catch (error) {
-      console.error("Login failed:", error.message);
-    }
+  const [loginState, setLoginState] =useState({
+    username: '',
+    password: ''
+  });
+  const handleLogin = (e) => {
+    setLoginState({ ...loginState, [e.target.id]: e.target.value });
   };
-
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    authenticateUser();
+  };
+  const authenticateUser = () => {
+    const endpoint = `http://${import.meta.env.VITE_PORT}/users/loginUser`;
+    axios.post(endpoint, loginState) 
+      .then(response => {
+        console.log(response.data);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  };
   return (
     <div 
       className="bg-sky-50 h-screen flex items-center justify-center" 
@@ -42,31 +43,30 @@ export default function Login() {
         <div className="header">
           <Logo linkUrl="/register" linkName={"Signup Here."} paragraph={"Not a member ?"} />
         </div>
-        <div className="email-field mx-auto">
-          <TextField
-            className="bg-sky-50  rounded-md"
-            size="small"
-            id="filled-basic"
-            label="UserName"
-            variant="filled"
-            onChange={(e) => setUsername(e.target.value)}
-          />
-        </div>
-        <div className="password-field mx-auto">
-          <TextField
-            className="bg-sky-50  rounded-md	"
-            size="small"
-            id="filled-basic"
-            label="Password"
-            variant="filled"
-            type="password"
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
+        <form className="grid gap-6 p-5">
+            {
+              loginFields.map((field) => (
+                <div key={`${field.id}`} className={`mx-auto ${field.label}-field`}>
+                  <TextField
+                    className="bg-sky-50 rounded-md	"
+                    size={field.size}
+                    id={field.id}
+                    label={field.label}
+                    variant={field.variant}
+                    type={field.type}
+                    onChange={handleLogin}
+                  />
+                </div>
+              ))
+            }
+        </form>
         <div className="login-btn flex items-center justify-center">
-          <Button variant="contained" onClick={handleLogin}>Login</Button>
+          <Button variant="contained" onClick={handleSubmit}>Login</Button>
         </div>
       </motion.div>
       </div>
   );
 }
+
+
+
