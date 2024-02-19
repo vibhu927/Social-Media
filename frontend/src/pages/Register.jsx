@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import TextField from '@mui/material/TextField';
 import { registerFields } from '../constants/formFields';
@@ -50,7 +49,7 @@ export default function Register() {
         </div>
         <form className="grid gap-6 p-5 grid-cols-2">
         {registerFields.map((field) => (
-          <div key={`${field.id}`} className={`mx-auto ${field.label}-field col-span-1`}>
+          <div key={`${field.id}} className={mx-auto ${field.label}-field col-span-1`}>
             <TextField
               className="bg-sky-50 rounded-md"
               size={field.size}
@@ -75,9 +74,6 @@ export default function Register() {
         </Link>
       </div>
       </motion.div>
-    </div>
-  );
+    </div>
+  );
 }
-
-
-

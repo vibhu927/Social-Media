@@ -5,12 +5,15 @@ import Button from "@mui/material/Button";
 import axios from 'axios';
 import Logo from "../components/Logo";
 import { motion } from "framer-motion";
+import { useNavigate } from 'react-router-dom';
+
 export default function Login() {
-  const containerVariants = {
-    hidden: { opacity: 0, rotateY: 180 },
-    visible: { opacity: 1, rotateY: 0, transition: { duration: 1.5, ease: "easeInOut" } },
+  const navigate = useNavigate();
+  const slideIn = {
+    hidden: { x: '-100%' },
+    visible: { x: 0, transition: { duration: 1.0 } },
   };
-  const [loginState, setLoginState] =useState({
+  const [loginState, setLoginState] = useState({
     username: '',
     password: ''
   });
@@ -23,22 +26,27 @@ export default function Login() {
   };
   const authenticateUser = () => {
     const endpoint = `http://${import.meta.env.VITE_PORT}/users/loginUser`;
-    axios.post(endpoint, loginState) 
-      .then(response => {
-        console.log(response.data);
-      })
-      .catch(error => {
-        console.error(error);
-      });
+
+  axios.post(endpoint, loginState)
+    .then(response => {
+      if (response.status === 200 && response.data.token) {
+        localStorage.setItem('authToken', response.data.token);
+        navigate('home');
+      } else {
+        console.error('Login failed:', response.statusText);
+      }
+    })
+    .catch(error => {
+      console.error('Error during login:', error);
+    });
   };
   return (
     <div 
       className="bg-sky-50 h-screen flex items-center justify-center" 
       >
       <motion.div className="grid gap-6 bg-slate-900 rounded p-12 rounded-xl shadow-xl dark:shadow-slate-600"
-      initial="hidden"
       animate="visible"
-      variants={containerVariants}
+      variants={slideIn}
       >
         <div className="header">
           <Logo linkUrl="/register" linkName={"Signup Here."} paragraph={"Not a member ?"} />
