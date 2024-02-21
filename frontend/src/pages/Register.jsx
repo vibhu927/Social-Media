@@ -33,16 +33,12 @@ export default function Register() {
         console.error(error);
       });
   };
-  const containerVariants = {
-    hidden: { opacity: 0, rotateY: 180 },
-    visible: { opacity: 1, rotateY: 0, transition: { duration: 1.5, ease: "easeInOut" } },
-  };
+
   return (
     <div className="bg-sky-50 h-screen flex items-center justify-center" >
        <motion.div className="grid gap-6 bg-slate-900 rounded p-12 rounded-xl shadow-xl dark:shadow-slate-600"
       initial="hidden"
       animate="visible"
-      variants={containerVariants}
       >
         <div className="header">
           <Logo linkUrl="/register" />
