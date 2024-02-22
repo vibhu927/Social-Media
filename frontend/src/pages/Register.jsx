@@ -4,7 +4,7 @@ import { registerFields } from '../constants/formFields';
 import Button from "@mui/material/Button";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import Logo from "../components/Logo";
+import Logo from "../components/Logo/Logo";
 import { motion } from "framer-motion";
 
 export default function Register() {
@@ -70,6 +70,5 @@ export default function Register() {
         </Link>
       </div>
       </motion.div>
-    </div>
-  );
+    </div>);
 }
